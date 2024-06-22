@@ -5,6 +5,7 @@ import "@fullcalendar/common/main.css";
 // import "@fullcalendar/daygrid/main.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import Providers from "@/src/layout/Providers";
+import SidbarLayoutProvider from "@/src/layout/SidbarLayoutProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            {" "}
+            <SidbarLayoutProvider>{children}</SidbarLayoutProvider>{" "}
+          </Providers>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -22,7 +22,7 @@ import {
   editEventOrReminder,
 } from "../store/reducers/schedule";
 
-interface EventDrawerProps {
+interface EventAndReminderDrawerProps {
   drawerOpen: boolean;
   selectedEvent: EventClickArg | null;
   addEvent: DateSelectArg | null;
@@ -38,7 +38,7 @@ const validationSchema = yup.object({
   end: yup.string().required("End Date is required"),
   type: yup.string().required("Type is required"),
 });
-const EventDrawer: React.FC<EventDrawerProps> = ({
+const EventAndReminderDrawer: React.FC<EventAndReminderDrawerProps> = ({
   drawerOpen,
   selectedEvent,
   addEvent,
@@ -183,4 +183,4 @@ const EventDrawer: React.FC<EventDrawerProps> = ({
   );
 };
 
-export default EventDrawer;
+export default EventAndReminderDrawer;

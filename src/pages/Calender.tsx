@@ -5,9 +5,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, EventClickArg } from "@fullcalendar/core/index.js";
-import EventDrawer from "../components/EventDrawer";
 import { Box } from "@mui/material";
 import { useAppSelector } from "../hooks/redux";
+import EventAndReminderDrawer from "../components/EventAndReminderDrawer";
 
 const FullCalenderPage: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -53,8 +53,13 @@ const FullCalenderPage: React.FC = () => {
         select={handleEventAdd}
         eventContent={renderEvent}
         events={eventsOrReminders}
+        headerToolbar={{
+          start: "prev,next today",
+          center: "title",
+          end: "dayGridMonth,timeGridWeek,timeGridDay",
+        }}
       />
-      <EventDrawer
+      <EventAndReminderDrawer
         drawerOpen={drawerOpen}
         selectedEvent={selectedEvent}
         addEvent={addEvent}

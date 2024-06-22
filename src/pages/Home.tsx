@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import DataTable from "../components/Home";
 import { RowData } from "../module/tables";
+import DataTable from "../components/Table";
 const createData = (
   name: string,
   calories: number,
