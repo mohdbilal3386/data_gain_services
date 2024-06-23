@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -60,16 +59,18 @@ const RowComponent: React.FC<RowProps> = ({ row }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
+        <TableCell sx={{ color: "#17c2af" }} component="th" scope="row">
+          {row.donor}
         </TableCell>
-        <TableCell align="center">{row.calories}</TableCell>
-        <TableCell align="center">{row.fat}</TableCell>
-        <TableCell align="center">{row.carbs}</TableCell>
-        <TableCell align="center">{row.protein}</TableCell>
-        <TableCell align="center">{row.calories}</TableCell>
-        <TableCell align="center">{row.fat}</TableCell>
-        <TableCell align="center">{row.carbs}</TableCell>
+        <TableCell align="center">{row.panels}</TableCell>
+        <TableCell sx={{ color: "#17c2af" }} align="center">
+          {row.barcode}
+        </TableCell>
+        <TableCell align="center">{row.source}</TableCell>
+        <TableCell align="center">{row.date}</TableCell>
+        <TableCell align="center">{row.amount}</TableCell>
+        <TableCell align="center">{row.observed_by}</TableCell>
+        <TableCell align="center">{row.status}</TableCell>
         <TableCell align="center">
           <Tooltip title={"Edit & Delete"} arrow>
             <EditDeleteMenu />
@@ -83,30 +84,7 @@ const RowComponent: React.FC<RowProps> = ({ row }) => {
               <Typography variant="h6" gutterBottom component="div">
                 History
               </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="center">Amount</TableCell>
-                    <TableCell align="center">Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="center">{historyRow.amount}</TableCell>
-                      <TableCell align="center">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <Table size="small" aria-label="purchases"></Table>
             </Box>
           </Collapse>
         </TableCell>
@@ -140,7 +118,7 @@ const DataTable: React.FC<DataTableProps> = ({ rows, headers }) => {
       <TableContainer>
         <Table aria-label="collapsible table">
           <TableHead>
-            <TableRow>
+            <TableRow sx={{ bgcolor: "#e5e5e5" }}>
               <TableCell />
               {headers.map((header, index) => (
                 <TableCell key={index} align={index === 0 ? "left" : "center"}>
@@ -153,7 +131,7 @@ const DataTable: React.FC<DataTableProps> = ({ rows, headers }) => {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <RowComponent key={row.name} row={row} />
+                <RowComponent key={row._id} row={row} />
               ))}
           </TableBody>
         </Table>

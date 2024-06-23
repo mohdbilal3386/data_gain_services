@@ -1,9 +1,11 @@
 export interface RowData {
-  name: string;
-  calories: number;
-  fat: number;
-  carbs: number;
-  protein: number;
-  price: number;
-  history: Array<{ date: string; customerId: string; amount: number }>;
+  _id?: string;
+  donor: string;
+  panels: string;
+  barcode: number;
+  source: string;
+  date: string;
+  amount: number;
+  observed_by: string;
+  status: string;
 }

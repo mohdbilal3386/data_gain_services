@@ -129,7 +129,8 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                     backgroundColor:
-                      pathname === item.url ? "rgba(0, 0, 0, 0.08)" : "inherit",
+                      pathname === item.url ? "#dcf6f3" : "inherit",
+                    color: pathname === item.url ? "#17c2af" : "inherit",
                   }}
                 >
                   <ListItemIcon
@@ -138,6 +139,7 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                       mr: open ? 3 : "auto",
                       zIndex: 99,
                       justifyContent: "center",
+                      color: pathname === item.url ? "#17c2af" : "inherit",
                     }}
                   >
                     {item.icon}
