@@ -1,4 +1,4 @@
-import { EventTypes } from "@/src/module/schedule";
+import { EventTypes } from "@/src/types/schedule";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "..";

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { tablesData } from "@/src/constant/tables";
-import { RowData } from "@/src/module/tables";
+import { RowData } from "@/src/types/tables";
 
 interface HomeTypes {
   tableData: RowData[];

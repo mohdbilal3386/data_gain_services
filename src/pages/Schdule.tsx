@@ -5,11 +5,11 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, EventClickArg } from "@fullcalendar/core/index.js";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useAppSelector } from "../hooks/redux";
 import EventAndReminderDrawer from "../components/EventAndReminderDrawer";
 
-const FullCalenderPage: React.FC = () => {
+const Schdule: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [isEditing, setIsEditing] = React.useState(false);
   const { eventsOrReminders } = useAppSelector((state) => state.schedule);
@@ -44,6 +44,15 @@ const FullCalenderPage: React.FC = () => {
 
   return (
     <>
+      <Box
+        display={{ xs: "block", sm: "flex" }}
+        justifyContent={"space-between"}
+        my={2}
+      >
+        <Typography variant="h5" gutterBottom fontWeight={"bold"}>
+          Schdule
+        </Typography>
+      </Box>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         editable
@@ -73,4 +82,4 @@ const FullCalenderPage: React.FC = () => {
   );
 };
 
-export default FullCalenderPage;
+export default Schdule;

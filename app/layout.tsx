@@ -4,7 +4,7 @@ import "./globals.css";
 import "@fullcalendar/common/main.css";
 // import "@fullcalendar/daygrid/main.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import Providers from "@/src/layout/Providers";
+import Providers from "@/src/layout/StoreProviders";
 import SidbarLayoutProvider from "@/src/layout/SidbarLayoutProvider";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -1,10 +1,9 @@
-import FullCalenderPage from "@/src/pages/Calender";
+import Schdule from "@/src/pages/Schdule";
 
 const Page = () => {
   return (
     <>
-      <h1>Schdule</h1>
-      <FullCalenderPage />
+      <Schdule />
     </>
   );
 };
