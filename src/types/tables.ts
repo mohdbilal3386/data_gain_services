@@ -2,7 +2,7 @@ export interface RowData {
   _id?: string;
   donor: string;
   panels: string;
-  barcode: number;
+  barcode: string;
   source: string;
   date: string;
   amount: number;

@@ -1,9 +1,11 @@
-const Page = () => {
+import Reports from "@/src/pages/Reports";
+
+const ReportsPage = () => {
   return (
     <>
-      <h1>Reports</h1>
+      <Reports />
     </>
   );
 };
 
-export default Page;
+export default ReportsPage;

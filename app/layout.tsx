@@ -25,12 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppRouterCacheProvider>
-          <Providers>
+        <Providers>
+          <AppRouterCacheProvider>
             {" "}
             <SidbarLayoutProvider>{children}</SidbarLayoutProvider>{" "}
-          </Providers>
-        </AppRouterCacheProvider>
+          </AppRouterCacheProvider>
+        </Providers>
       </body>
     </html>
   );

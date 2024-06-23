@@ -1,6 +1,6 @@
 import Schdule from "@/src/pages/Schdule";
 
-const Page = () => {
+const SchdulePage = () => {
   return (
     <>
       <Schdule />
@@ -8,4 +8,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default SchdulePage;

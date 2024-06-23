@@ -1,7 +1,5 @@
 import { EventTypes } from "@/src/types/schedule";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-import { RootState } from "..";
 import { scheduleData } from "@/src/constant/schedule";
 
 interface Schedule {
@@ -42,6 +40,4 @@ export const {
   editEventOrReminder,
   deleteEventOrReminder,
 } = scheduleSlice.actions;
-export const selectEvent = (state: RootState) =>
-  state.schedule.eventsOrReminders;
 export default scheduleSlice.reducer;

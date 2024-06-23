@@ -1,6 +1,6 @@
 import Home from "@/src/pages/Home";
 
-const Page = () => {
+const HomePage = () => {
   return (
     <>
       <Home />
@@ -8,4 +8,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default HomePage;

@@ -19,12 +19,19 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { RowData } from "../types/tables";
+import { useAppDispatch } from "../hooks/redux";
+import { deleteRow } from "../store/reducers/home";
 
 interface RowProps {
   row: RowData;
+  handleEdit: (item: RowData) => void;
 }
 
-const EditDeleteMenu: React.FC = () => {
+const EditDeleteMenu: React.FC<{
+  handleEdit: (item: RowData) => void;
+  row: RowData;
+}> = ({ row, handleEdit }) => {
+  const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,33 +43,30 @@ const EditDeleteMenu: React.FC = () => {
   };
 
   return (
-    <div>
-      <IconButton aria-label="MoreVertIcon" onClick={handleClick}>
-        <MoreVertIcon />
-      </IconButton>
+    <>
+      <Tooltip arrow title={"Edit/Delete"}>
+        <IconButton aria-label="MoreVertIcon" onClick={handleClick}>
+          <MoreVertIcon />
+        </IconButton>
+      </Tooltip>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={() => handleEdit(row)}>Edit</MenuItem>
+        <MenuItem
+          onClick={() => {
+            row._id && dispatch(deleteRow(row._id));
+          }}
+        >
+          Delete
+        </MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
 
-const RowComponent: React.FC<RowProps> = ({ row }) => {
-  const [open, setOpen] = React.useState(false);
-
+const RowComponent: React.FC<RowProps> = ({ row, handleEdit }) => {
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
         <TableCell sx={{ color: "#17c2af" }} component="th" scope="row">
           {row.donor}
         </TableCell>
@@ -72,27 +76,21 @@ const RowComponent: React.FC<RowProps> = ({ row }) => {
         </TableCell>
         <TableCell align="center">{row.source}</TableCell>
         <TableCell align="center">{row.date}</TableCell>
-        <TableCell align="center">{row.amount}</TableCell>
+        <TableCell align="center">
+          {row.amount.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })}
+        </TableCell>
         <TableCell align="center">{row.observed_by}</TableCell>
         <TableCell align="center">{row.status}</TableCell>
         <TableCell align="center">
           <Tooltip title={"Edit & Delete"} arrow>
-            <EditDeleteMenu />
+            <EditDeleteMenu handleEdit={handleEdit} row={row} />
           </Tooltip>
         </TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases"></Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
+      <TableRow></TableRow>
     </React.Fragment>
   );
 };
@@ -100,9 +98,10 @@ const RowComponent: React.FC<RowProps> = ({ row }) => {
 interface DataTableProps {
   rows: RowData[];
   headers: string[];
+  handleEdit: (item: RowData) => void;
 }
 
-const DataTable: React.FC<DataTableProps> = ({ rows, headers }) => {
+const DataTable: React.FC<DataTableProps> = ({ rows, headers, handleEdit }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -123,7 +122,6 @@ const DataTable: React.FC<DataTableProps> = ({ rows, headers }) => {
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow sx={{ bgcolor: "#e5e5e5" }}>
-              <TableCell />
               {headers.map((header, index) => (
                 <TableCell key={index} align={index === 0 ? "left" : "center"}>
                   {header}
@@ -131,13 +129,25 @@ const DataTable: React.FC<DataTableProps> = ({ rows, headers }) => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <RowComponent key={row._id} row={row} />
-              ))}
-          </TableBody>
+          {rows.length === 0 ? (
+            <Box py={10}>
+              <Typography variant="h6" textAlign={"center"}>
+                Sorry No Data Found
+              </Typography>
+            </Box>
+          ) : (
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <RowComponent
+                    handleEdit={handleEdit}
+                    key={row._id}
+                    row={row}
+                  />
+                ))}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
       <TablePagination

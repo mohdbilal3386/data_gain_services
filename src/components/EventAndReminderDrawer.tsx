@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   TextField,
-  Button,
   MenuItem,
   IconButton,
   Tooltip,
@@ -21,6 +20,7 @@ import {
   deleteEventOrReminder,
   editEventOrReminder,
 } from "../store/reducers/schedule";
+import StyledButton from "./StyledButton";
 
 interface EventAndReminderDrawerProps {
   drawerOpen: boolean;
@@ -154,9 +154,12 @@ const EventAndReminderDrawer: React.FC<EventAndReminderDrawerProps> = ({
                   </TextField>
                 </Box>
                 <Box mt={2} display={"flex"} gap={2}>
-                  <Button type="submit" variant="contained" color="primary">
-                    {isEditing ? "Update" : "Save"}
-                  </Button>
+                  <StyledButton
+                    title={isEditing ? "Update" : "Save"}
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  />
                   {isEditing ? (
                     <IconButton
                       aria-label="MoreVertIcon"

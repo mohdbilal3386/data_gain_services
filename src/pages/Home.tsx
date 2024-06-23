@@ -2,9 +2,15 @@
 
 import React from "react";
 import DataTable from "../components/Table";
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { Box, Typography } from "@mui/material";
 import StyledButton from "../components/StyledButton";
+import AddAndEditRowModule from "../components/AddAndEditRowModule";
+import { RowData } from "../types/tables";
+import { addRow, editRow } from "../store/reducers/home";
+import { v4 as uuid } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const headers = [
   "DONOR",
@@ -18,7 +24,29 @@ const headers = [
   "ACTION",
 ];
 const Home: React.FC = () => {
-  const { tableData } = useAppSelector((state) => state.home);
+  const tableData = useAppSelector((state) => state.home.tableData);
+  const dispatch = useAppDispatch();
+  const [itemToBeEdit, setItemToBeEdit] = React.useState<RowData | null>(null);
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleEdit = (item: RowData) => {
+    setOpen(true);
+    setItemToBeEdit(item);
+    setIsEditing(true);
+  };
+  const handleSubmit = (item: RowData) => {
+    if (isEditing && itemToBeEdit) {
+      const { _id } = itemToBeEdit;
+      dispatch(editRow({ _id, ...item }));
+    } else {
+      dispatch(addRow({ _id: uuid(), ...item }));
+    }
+    setIsEditing(false);
+    setItemToBeEdit(null);
+  };
   return (
     <>
       <Box
@@ -29,9 +57,16 @@ const Home: React.FC = () => {
         <Typography variant="h5" gutterBottom fontWeight={"bold"}>
           Home
         </Typography>
-        <StyledButton title="Add" />
+        <StyledButton title="Add" onClick={handleClickOpen} />
       </Box>
-      <DataTable rows={tableData} headers={headers} />
+      <DataTable handleEdit={handleEdit} rows={tableData} headers={headers} />
+      <AddAndEditRowModule
+        open={open}
+        setOpen={setOpen}
+        isEditing={isEditing}
+        itemToBeEdit={itemToBeEdit}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 };

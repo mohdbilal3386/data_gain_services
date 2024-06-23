@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "..";
 import { tablesData } from "@/src/constant/tables";
 import { RowData } from "@/src/types/tables";
 
@@ -32,5 +31,4 @@ export const homeSlice = createSlice({
 });
 
 export const { addRow, editRow, deleteRow } = homeSlice.actions;
-export const selectHome = (state: RootState) => state.home.tableData;
 export default homeSlice.reducer;
