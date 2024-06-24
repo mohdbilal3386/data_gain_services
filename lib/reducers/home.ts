@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { tablesData } from "@/src/constant/tables";
-import { RowData } from "@/src/types/tables";
+import { tablesData } from "@/app/constant/tables";
+import { RowData } from "@/app/types/tables";
 
 interface HomeTypes {
   tableData: RowData[];
@@ -31,4 +31,3 @@ export const homeSlice = createSlice({
 });
 
 export const { addRow, editRow, deleteRow } = homeSlice.actions;
-export default homeSlice.reducer;

@@ -2,15 +2,13 @@
 
 import React from "react";
 import DataTable from "../components/Table";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { Box, Typography } from "@mui/material";
 import StyledButton from "../components/StyledButton";
 import AddAndEditRowModule from "../components/AddAndEditRowModule";
 import { RowData } from "../types/tables";
-import { addRow, editRow } from "../store/reducers/home";
+import { addRow, editRow } from "../../lib/reducers/home";
 import { v4 as uuid } from "uuid";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 
 const headers = [
   "DONOR",

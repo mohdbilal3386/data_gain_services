@@ -19,8 +19,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { RowData } from "../types/tables";
-import { useAppDispatch } from "../hooks/redux";
-import { deleteRow } from "../store/reducers/home";
+// import { useAppDispatch } from "../hooks/redux";
+import { deleteRow } from "../../lib/reducers/home";
+import { useAppDispatch } from "../../lib/hooks";
 
 interface RowProps {
   row: RowData;

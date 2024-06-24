@@ -1,6 +1,6 @@
-import { EventTypes } from "@/src/types/schedule";
+import { EventTypes } from "@/app/types/schedule";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { scheduleData } from "@/src/constant/schedule";
+import { scheduleData } from "@/app/constant/schedule";
 
 interface Schedule {
   eventsOrReminders: EventTypes[];
@@ -30,14 +30,13 @@ export const scheduleSlice = createSlice({
       );
     },
   },
-  //   extraReducers: (builder) => {
-  // use this for asynchronous
-  //   }
+  selectors: {
+    selectEventsOrReminders: (val) => val.eventsOrReminders,
+  },
 });
-
+export const { selectEventsOrReminders } = scheduleSlice.selectors;
 export const {
   addEventOrReminder,
   editEventOrReminder,
   deleteEventOrReminder,
 } = scheduleSlice.actions;
-export default scheduleSlice.reducer;

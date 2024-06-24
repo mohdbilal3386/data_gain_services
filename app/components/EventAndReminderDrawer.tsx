@@ -14,13 +14,14 @@ import { DateSelectArg, EventClickArg } from "@fullcalendar/core/index.js";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useAppDispatch } from "../hooks/redux";
+
 import {
   addEventOrReminder,
   deleteEventOrReminder,
   editEventOrReminder,
-} from "../store/reducers/schedule";
+} from "../../lib/reducers/schedule";
 import StyledButton from "./StyledButton";
+import { useAppDispatch } from "../../lib/hooks";
 
 interface EventAndReminderDrawerProps {
   drawerOpen: boolean;

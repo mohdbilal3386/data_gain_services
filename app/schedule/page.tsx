@@ -1,4 +1,4 @@
-import Schdule from "@/src/pages/Schdule";
+import Schdule from "@/app/pages/Schdule";
 
 const SchdulePage = () => {
   return (

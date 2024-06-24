@@ -6,13 +6,15 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, EventClickArg } from "@fullcalendar/core/index.js";
 import { Box, Typography } from "@mui/material";
-import { useAppSelector } from "../hooks/redux";
+
 import EventAndReminderDrawer from "../components/EventAndReminderDrawer";
+import { selectEventsOrReminders } from "../../lib/reducers/schedule";
+import { useAppSelector } from "../../lib/hooks";
 
 const Schdule: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [isEditing, setIsEditing] = React.useState(false);
-  const { eventsOrReminders } = useAppSelector((state) => state.schedule);
+  const eventsOrReminders = useAppSelector(selectEventsOrReminders);
   const [selectedEvent, setSelectedEvent] =
     React.useState<EventClickArg | null>(null);
   const [addEvent, setAddEvent] = React.useState<DateSelectArg | null>(null);
